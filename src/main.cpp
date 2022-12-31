@@ -19,9 +19,7 @@ int main() {
         BeginDrawing();
             ClearBackground(RAYWHITE);
             DrawFPS(0,0);
-            DrawCircleGradient(400, 300, 20, GOLD, DARKPURPLE);
             DrawTexture(person, 200, 500, WHITE);
-            DrawText("Hello World", WIDTH / 2 - 5, HEIGHT / 2 - 15, 30, BLACK);
         EndDrawing();
     }
     return 0;
