@@ -1,5 +1,5 @@
 all:
-	g++ -lraylib src/main.cpp -o sokoban -Wall
+	g++ -lraylib src/main.cpp src/player.cpp -o sokoban -Wall
 
 clean:
 	rm sokoban

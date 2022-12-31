@@ -1,15 +1,21 @@
 #include <raylib.h>
 #include <iostream>
 
+#include "player.hpp"
+
 int main() {
     const char* TITLE = "Sokoban!!!";
     const int WIDTH = 1280;
     const int HEIGHT = 720;
     InitWindow(WIDTH, HEIGHT,  TITLE);
 
-    Texture2D person = LoadTexture("assets/sprites/player.png");
     const int FPS = 60;
     SetTargetFPS(FPS);
+
+    Player person(
+        (Vector2){200, 500},
+        LoadTexture("assets/sprites/player.png")
+        );
 
     if(!IsWindowReady()) {
         std::cout << "Window isn't ready :(" << std::endl;
@@ -19,7 +25,7 @@ int main() {
         BeginDrawing();
             ClearBackground(RAYWHITE);
             DrawFPS(0,0);
-            DrawTexture(person, 200, 500, WHITE);
+            person.draw();
         EndDrawing();
     }
     return 0;
