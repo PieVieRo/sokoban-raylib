@@ -1,19 +1,20 @@
 #include <raylib.h>
+#include <raymath.h>
 #include <iostream>
+
 
 #include "player.hpp"
 
 int main() {
     const char* TITLE = "Sokoban!!!";
-    const int WIDTH = 1280;
-    const int HEIGHT = 720;
+    const int WIDTH = 640;  // all sprites are 64x64
+    const int HEIGHT = 640;
     InitWindow(WIDTH, HEIGHT,  TITLE);
 
     const int FPS = 60;
     SetTargetFPS(FPS);
-
     Player person(
-        (Vector2){200, 500},
+        (Vector2){0, 0},
         LoadTexture("assets/sprites/player.png")
         );
 
@@ -22,11 +23,14 @@ int main() {
         return -1;
     }
     while(!WindowShouldClose()) {
+        // Drawing
         BeginDrawing();
             ClearBackground(RAYWHITE);
             DrawFPS(0,0);
             person.draw();
         EndDrawing();
+        // Physics and stuff idk
+        person.move();
     }
     return 0;
 }

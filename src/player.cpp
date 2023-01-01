@@ -10,5 +10,8 @@ void Player::draw() {
 }
 
 void Player::move() {
-    return;
+    if(IsKeyPressed(KEY_UP))  { this->location = Vector2Add(this->location, (Vector2){ 0, -64 }); };
+    if(IsKeyPressed(KEY_DOWN)) { this->location = Vector2Add(this->location, (Vector2){ 0,  64 }); };
+    if(IsKeyPressed(KEY_RIGHT))    { this->location = Vector2Add(this->location, (Vector2){ 64,  0 }); };
+    if(IsKeyPressed(KEY_LEFT))  { this->location = Vector2Add(this->location, (Vector2){ -64, 0 }); };
 }
