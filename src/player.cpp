@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "player.hpp"
 
 Player::Player(Vector2 location, Texture2D sprite) {
@@ -14,4 +16,5 @@ void Player::move() {
     if(IsKeyPressed(KEY_DOWN)) { this->location = Vector2Add(this->location, (Vector2){ 0,  64 }); };
     if(IsKeyPressed(KEY_RIGHT))    { this->location = Vector2Add(this->location, (Vector2){ 64,  0 }); };
     if(IsKeyPressed(KEY_LEFT))  { this->location = Vector2Add(this->location, (Vector2){ -64, 0 }); };
+    this->location = Vector2Clamp(this->location, Vector2Zero(), (Vector2){576,576});
 }
