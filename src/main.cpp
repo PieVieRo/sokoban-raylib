@@ -19,18 +19,19 @@ int main() {
         return -1;
     }
 
-    Block ground(LoadTexture("assets/sprites/ground.png"), true);
+    Texture2D ground = LoadTexture("assets/sprites/ground.png");
+
     Block wall(LoadTexture("assets/sprites/wall.png"));
     Block* test_level[10][10] {
         &wall, &wall, &wall, &wall,  &wall,  &wall,  &wall,  &wall,  &wall,  &wall,
-        &wall, &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &wall,
-        &wall, &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &wall,
-        &wall, &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &wall,
-        &wall, &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &wall,
-        &wall, &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &wall,
-        &wall, &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &wall,
-        &wall, &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &wall,
-        &wall, &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &ground,  &wall,
+        &wall, nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  &wall,
+        &wall, nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  &wall,
+        &wall, nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  &wall,
+        &wall, nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  &wall,
+        &wall, nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  &wall,
+        &wall, nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  &wall,
+        &wall, nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  &wall,
+        &wall, nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  nullptr,  &wall,
         &wall, &wall,  &wall,  &wall,  &wall,  &wall,  &wall,  &wall,  &wall,  &wall,
     };
 
@@ -42,13 +43,11 @@ int main() {
     while(!WindowShouldClose()) {
         // Drawing
         BeginDrawing();
-            ClearBackground(RAYWHITE);
-
             for(int x=0; x<10; x++) {
                 for(int y=0; y<10; y++) {
-                    if(test_level[x][y] != &ground)
-                        ground.draw(x,y);
-                    test_level[x][y]->draw(x,y);
+                    DrawTexture(ground, 64*x, 64*y, WHITE);
+                    if(test_level[x][y])
+                        test_level[x][y]->draw(x,y);
                 }
             }
             person.draw();
