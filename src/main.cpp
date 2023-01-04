@@ -24,10 +24,7 @@ int main() {
         return -1;
     }
 
-    Player player(
-            (Vector2){0,0},
-            LoadTexture("assets/sprites/player.png")
-            );
+    Player player(LoadTexture("assets/sprites/player.png"));
     Block wall(LoadTexture("assets/sprites/wall.png"));
 
     block_ids = {
@@ -51,6 +48,7 @@ int main() {
     };
 
 
+    int player_location[2];
     while(!WindowShouldClose()) {
         // Drawing
         BeginDrawing();
@@ -58,17 +56,18 @@ int main() {
                 for(int x=0; x<10; x++) {
                     DrawTexture(ground, 64*x, 64*y, WHITE);
                     if(test_level[y][x]) {
-                        if(test_level[y][x] &     1) std::any_cast<Block*>(block_ids[test_level[y][x]])->draw(x,y);
-                        if(test_level[y][x] & 32678) std::any_cast<Player*>(block_ids[test_level[y][x]])->draw();
+                        if(test_level[y][x] & 32678) { player_location[0] = y; player_location[1] = x; continue; }
+                        else { std::any_cast<Block*>(block_ids[test_level[y][x]])->draw(x,y); continue; }
                     }
                 }
             }
+            player.draw(player_location);
 
             DrawFPS(0,0);
 
         EndDrawing();
         // Physics and stuff idk
-        player.move();
+        player.move(player_location, test_level);
 
     }
     std::cout << block_ids[1].type().name() << std::endl;

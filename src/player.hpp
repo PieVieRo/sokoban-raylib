@@ -4,13 +4,11 @@
 #include<raymath.h>
 
 class Player {
-
-    Vector2   location;
     Texture2D sprite;
 
 public:
-    Player(Vector2 location, Texture2D sprite);
-    void draw();
-    void move();
+    Player(Texture2D sprite);
+    void draw(int pl[2]);
+    void move(int pl[2], int test_level[10][10]);
 
 };
