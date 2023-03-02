@@ -2,13 +2,10 @@
 #include <raymath.h>
 
 #include <iostream>
-#include <any>
 #include <map>
 
 #include "player.hpp"
-#include "block.hpp"
-
-std::map<short, std::any> block_ids = {};
+#include "level.hpp"
 
 int main() {
     const char* TITLE = "Sokoban!!!";
@@ -24,52 +21,39 @@ int main() {
         return -1;
     }
 
-    Player player(LoadTexture("assets/sprites/player.png"));
-    Block wall(LoadTexture("assets/sprites/wall.png"));
+    Player player(
+            LoadTexture("assets/images/player.png"),
+            (Vector2){2,2}
+            );
 
-    block_ids = {
-        {32678, &player},
-        {1, &wall},
-    };
+    Level level(
+            [ 1,1,1,1,1,1,1,1,1,1,
+              1,0,0,0,0,0,0,0,0,1,
+              1,0,0,0,0,0,0,0,0,1,
+              1,0,0,0,0,0,0,0,0,1,
+              1,0,0,0,0,0,0,0,0,1,
+              1,0,0,0,0,0,0,0,0,1,
+              1,0,0,0,0,0,0,0,0,1,
+              1,0,0,0,0,0,0,0,0,1,
+              1,1,0,0,0,0,0,0,0,1,
+              1,1,1,1,1,1,1,1,1,1 ]
+            )
 
-    Texture2D ground = LoadTexture("assets/sprites/ground.png");
+        std::map<int, Texture2D> textures{
+            {1, LoadTexture("assets/images/wall.png")}
+        };
 
-    int test_level[10][10] {
-        1, 1,     1, 1, 1, 1, 1, 1, 1, 1,
-        1, 0,     0, 0, 0, 0, 0, 0, 0, 1,
-        1, 1,     0, 0, 0, 0, 0, 0, 0, 1,
-        1, 0,     0, 0, 0, 0, 0, 0, 0, 1,
-        1, 32678, 0, 0, 0, 0, 0, 0, 0, 1,
-        1, 0,     0, 0, 0, 0, 0, 0, 0, 1,
-        1, 0,     0, 0, 0, 0, 0, 0, 0, 1,
-        1, 0,     0, 0, 0, 0, 0, 0, 0, 1,
-        1, 0,     0, 0, 0, 0, 0, 0, 0, 1,
-        1, 1,     1, 1, 1, 1, 1, 1, 1, 1,
-    };
-
-
-    int player_location[2];
     while(!WindowShouldClose()) {
         // Drawing
         BeginDrawing();
-            for(int y=0; y<10; y++) {
-                for(int x=0; x<10; x++) {
-                    DrawTexture(ground, 64*x, 64*y, WHITE);
-                    if(test_level[y][x]) {
-                        if(test_level[y][x] & 32678) { player_location[0] = y; player_location[1] = x; continue; }
-                        else { std::any_cast<Block*>(block_ids[test_level[y][x]])->draw(x,y); continue; }
-                    }
-                }
-            }
-            player.draw(player_location);
+            player.draw();
 
             DrawFPS(0,0);
 
         EndDrawing();
         // Physics and stuff idk
-        player.move(player_location, test_level);
+        player.move(&level);
 
     }
-    std::cout << block_ids[1].type().name() << std::endl;
     return 0;
 }

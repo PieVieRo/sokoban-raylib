@@ -3,12 +3,15 @@
 #include<raylib.h>
 #include<raymath.h>
 
+#include "level.hpp"
+
 class Player {
     Texture2D sprite;
+    Vector2 location;
 
 public:
-    Player(Texture2D sprite);
-    void draw(int pl[2]);
-    void move(int pl[2], int test_level[10][10]);
+    Player(Texture2D sprite, Vector2 location);
+    void draw();
+    void move(Level* level);
 
 };
