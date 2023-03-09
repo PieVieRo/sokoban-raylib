@@ -22,12 +22,12 @@ int main() {
     }
 
     Player player(
-            LoadTexture("assets/images/player.png"),
+            LoadTexture("assets/sprites/player.png"),
             (Vector2){2,2}
             );
 
-    Level level(
-            [ 1,1,1,1,1,1,1,1,1,1,
+   int levelArr[100] =
+            { 1,1,1,1,1,1,1,1,1,1,
               1,0,0,0,0,0,0,0,0,1,
               1,0,0,0,0,0,0,0,0,1,
               1,0,0,0,0,0,0,0,0,1,
@@ -36,16 +36,18 @@ int main() {
               1,0,0,0,0,0,0,0,0,1,
               1,0,0,0,0,0,0,0,0,1,
               1,1,0,0,0,0,0,0,0,1,
-              1,1,1,1,1,1,1,1,1,1 ]
-            )
+              1,1,1,1,1,1,1,1,1,1 };
+
+    Level level(levelArr);
 
         std::map<int, Texture2D> textures{
-            {1, LoadTexture("assets/images/wall.png")}
+            {1, LoadTexture("assets/sprites/wall.png")}
         };
 
     while(!WindowShouldClose()) {
         // Drawing
         BeginDrawing();
+            level.draw(textures);
             player.draw();
 
             DrawFPS(0,0);
