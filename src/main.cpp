@@ -26,22 +26,25 @@ int main() {
             (Vector2){2,2}
             );
 
-   int levelArr[100] =
-            { 1,1,1,1,1,1,1,1,1,1,
-              1,0,0,0,0,0,0,0,0,1,
-              1,0,0,0,0,0,0,0,0,1,
-              1,0,0,0,0,0,0,0,0,1,
-              1,0,0,0,0,0,0,0,0,1,
-              1,0,0,0,0,0,0,0,0,1,
-              1,0,0,0,0,0,0,0,0,1,
-              1,0,0,0,0,0,0,0,0,1,
-              1,1,0,0,0,0,0,0,0,1,
-              1,1,1,1,1,1,1,1,1,1 };
+    int levelArr[100] =
+    {   1,1,1,1,1,1,1,1,1,1,
+        1,0,0,0,0,0,0,0,0,1,
+        1,0,0,0,0,0,0,0,0,1,
+        1,0,0,0,0,0,0,0,0,1,
+        1,0,0,0,0,0,0,0,0,1,
+        1,0,0,0,0,0,0,0,0,1,
+        1,0,0,0,0,0,0,0,0,1,
+        1,0,0,0,0,0,0,0,0,1,
+        1,1,0,0,0,0,0,0,0,1,
+        1,1,1,1,1,1,1,1,1,1 };
 
     Level level(levelArr);
 
-        std::map<int, Texture2D> textures{
-            {1, LoadTexture("assets/sprites/wall.png")}
+    Texture2D groundTexture = LoadTexture("assets/sprites/ground.png");
+    Texture2D wallTexture = LoadTexture("assets/sprites/wall.png");
+    std::map<int, Texture2D> textures{
+            {0, groundTexture},
+            {1, wallTexture}
         };
 
     while(!WindowShouldClose()) {
